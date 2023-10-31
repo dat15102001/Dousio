@@ -15,7 +15,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		22064D332AEFEFA600998964 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22064D322AEFEFA600998964 /* AppCenter-Config.plist */; };
 		221D90AA2AEEA9E300EE28E2 /* RNPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A290E128E2D64798B2EABF7B /* RNPlaceholder.swift */; };
-		22EE50822AF0DBB100D6E844 /* hermes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EE50812AF0DBB100D6E844 /* hermes.xcframework */; };
+		22EE50852AF0E8E200D6E844 /* hermes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EE50812AF0DBB100D6E844 /* hermes.xcframework */; };
 		549A036A43C34A7795DC7F98 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FAC2AFC8F4B471DBCBBABC7 /* Inter-SemiBold.ttf */; };
 		5BE09BCD8E734EB3B26E76FE /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D1C8A5EEAF3457BA293BCDC /* Inter-Light.ttf */; };
 		5C33C61E48FC49E2BD328FED /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C01403A04B154AB6AC8AD420 /* Inter-Regular.ttf */; };
@@ -76,7 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22EE50822AF0DBB100D6E844 /* hermes.xcframework in Frameworks */,
 				7699B88040F8A987B510C191 /* libPods-Dousio-DousioTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22EE50852AF0E8E200D6E844 /* hermes.xcframework in Frameworks */,
 				0C80B921A6F3F58F76C31292 /* libPods-Dousio.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
