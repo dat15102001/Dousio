@@ -13,7 +13,6 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		22064D332AEFEFA600998964 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22064D322AEFEFA600998964 /* AppCenter-Config.plist */; };
 		221D90AA2AEEA9E300EE28E2 /* RNPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A290E128E2D64798B2EABF7B /* RNPlaceholder.swift */; };
 		22EE50852AF0E8E200D6E844 /* hermes.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EE50812AF0DBB100D6E844 /* hermes.xcframework */; };
 		549A036A43C34A7795DC7F98 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FAC2AFC8F4B471DBCBBABC7 /* Inter-SemiBold.ttf */; };
@@ -50,8 +49,11 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Dousio/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Dousio/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-Dousio-DousioTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Dousio-DousioTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+<<<<<<< HEAD
 		22064D322AEFEFA600998964 /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		22EE50812AF0DBB100D6E844 /* hermes.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = hermes.xcframework; path = "Pods/hermes-engine/destroot/Library/Frameworks/universal/hermes.xcframework"; sourceTree = "<group>"; };
+=======
+>>>>>>> parent of e0a9474 (update pod appcenter)
 		3B4392A12AC88292D35C810B /* Pods-Dousio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dousio.debug.xcconfig"; path = "Target Support Files/Pods-Dousio/Pods-Dousio.debug.xcconfig"; sourceTree = "<group>"; };
 		448A7DD02EFB4C3F974C347A /* Inter-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-ExtraLight.ttf"; path = "../src/assets/fonts/Inter-ExtraLight.ttf"; sourceTree = "<group>"; };
 		4CBB7C783B6E433590A71DDA /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; };
@@ -118,7 +120,6 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				22064D322AEFEFA600998964 /* AppCenter-Config.plist */,
 			);
 			name = Dousio;
 			sourceTree = "<group>";
@@ -244,6 +245,8 @@
 			dependencies = (
 			);
 			name = Dousio;
+			packageProductDependencies = (
+			);
 			productName = Dousio;
 			productReference = 13B07F961A680F5B00A75B9A /* Dousio.app */;
 			productType = "com.apple.product-type.application";
@@ -300,7 +303,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				22064D332AEFEFA600998964 /* AppCenter-Config.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				A88B97599F694E0EBEABDA68 /* Inter-Black.ttf in Resources */,
 				8046B8288E2E4FF6926F4B91 /* Inter-Bold.ttf in Resources */,
