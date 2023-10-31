@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   AppCenter-Config.plist.plist
+   Dousio
+
+   Created by Đạt Nguyễn on 30/10/2023.
+   Copyright (c) 2023 ___ORGANIZATIONNAME___. All rights reserved.
+-->
+<plist version="1.0">
+    <dict>
+    <key>AppSecret</key>
+    <string>a68cf6c5-e482-4504-ae19-38c0bea54a94</string>
+    </dict>
+</plist>
