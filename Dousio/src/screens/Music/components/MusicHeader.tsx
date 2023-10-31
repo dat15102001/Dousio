@@ -7,13 +7,12 @@ import AppText from '@/components/AppText'
 import { Colors } from '@/theme'
 
 interface IMusicHeader {
-  onPressLogoBtn?: () => void
   onPressNotifiBtn?: () => void
   onPressCreateBtn?: () => void
 }
 
 const MusicHeader = (props: IMusicHeader) => {
-  const { onPressLogoBtn, onPressNotifiBtn, onPressCreateBtn } = props
+  const { onPressNotifiBtn, onPressCreateBtn } = props
   return (
     <Header
       renderLeft={() => (

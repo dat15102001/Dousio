@@ -11,6 +11,7 @@ import AppText from '@/components/AppText'
 import { Colors } from '@/theme'
 import FastImage from 'react-native-fast-image'
 import TrackPlayer, { Capability } from 'react-native-track-player'
+import AppBottomSheet from '@/components/AppBottomSheet'
 
 export interface IPlaylistItem {
   url: string
@@ -61,7 +62,6 @@ const MusicItem = (props: IPlaylistItem) => {
   const onPlayMusic = async () => {
     const track = await TrackPlayer.getTrack(0)
     console.log('track=', track.url)
-    // TrackPlayer.play()
     TrackPlayer.play()
   }
 

@@ -47,6 +47,7 @@ const AppBottomSheet = forwardRef(
           snapPoints={snapPoints}
           enablePanDownToClose
           ref={sheetRef}
+          // handleIndicatorStyle={{backgroundColor: 'green'}}
         >
           {children}
         </BottomSheet>

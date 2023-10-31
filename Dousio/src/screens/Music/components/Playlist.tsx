@@ -8,6 +8,7 @@ import Padding from '@/components/Padding'
 import AppText from '@/components/AppText'
 import { Colors } from '@/theme'
 import MusicItem from './MusicItem'
+import AppBottomSheet from '@/components/AppBottomSheet'
 
 const Playlist = () => {
   const listPlaylist: [IPlaylistItem] = [
