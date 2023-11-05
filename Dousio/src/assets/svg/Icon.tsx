@@ -34,6 +34,11 @@ import ICSaveFill from './ICSaveFill'
 import ICBack2 from './ICBack2'
 import ICArrowDown from './ICArrowDown'
 import ICDelete from './ICDelete'
+import ICShuffle from './ICShuffle'
+import ICNext from './ICNext'
+import ICPrev from './ICPrev'
+import ICLoop from './ICLoop'
+import ICShareMusic from './ICShareMusic'
 
 interface IProps {
   iconName: IconName
@@ -80,6 +85,11 @@ const Icon = (props: IProps) => {
     ['pause', <ICPauseVideo size={size} color={color} />],
     ['arrowdown', <ICArrowDown size={size} color={color} />],
     ['delete', <ICDelete size={size} color={color} />],
+    ['shuffle', <ICShuffle size={size} color={color} />],
+    ['next', <ICNext size={size} color={color} />],
+    ['prev', <ICPrev size={size} color={color} />],
+    ['loop', <ICLoop size={size} color={color} />],
+    ['share-music', <ICShareMusic size={size} color={color} />],
   ])
   return icon.get(iconName) ?? null
 }

@@ -1,10 +1,11 @@
 import React from 'react'
-import { NavigationContainer, DarkTheme } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import MainStack from './MainStack'
+import { refNavigation } from './navigationHelper'
 
 const Navigator = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={refNavigation}>
       <MainStack />
     </NavigationContainer>
   )

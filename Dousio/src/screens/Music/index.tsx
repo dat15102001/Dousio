@@ -1,30 +1,26 @@
-import {
-  ActivityIndicator,
-  RefreshControl,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  StatusBar,
-} from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { RefreshControl, StyleSheet, ScrollView, ViewStyle } from 'react-native'
+import React, { useMemo, useState } from 'react'
 import Ads from './components/Ads'
 import Box from '@/components/Box'
-import { Colors, screenHeight, screenWidth } from '@/theme'
+import { Colors, screenHeight } from '@/theme'
 import MusicHeader from './components/MusicHeader'
 import ListFeature from './components/ListFeature'
 import HeardRecently from './components/HeardRecently'
 import MusicTabView from './components/MusicTabView'
 import AppBottomSheet from '@/components/AppBottomSheet'
-import AppText from '@/components/AppText'
 import { SheetTypeMusic } from '@/constants'
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 
 const Music = () => {
-  const [sheetType, setSheetType] = useState('')
-
-  useEffect(() => {
-    console.log(sheetType)
-  }, [sheetType])
+  const [sheetType, setSheetType] = useState<string>('')
+  const bottomTabHeight = useBottomTabBarHeight()
+  
+  const paddingBottom = useMemo<ViewStyle>(
+    () => ({
+      paddingBottom: bottomTabHeight,
+    }),
+    [bottomTabHeight],
+  )
 
   return (
     <Box style={{ flex: 1, backgroundColor: Colors.black }}>
@@ -34,13 +30,14 @@ const Music = () => {
       <ScrollView
         refreshControl={<RefreshControl refreshing={false} tintColor="#fff" />}
         scrollEventThrottle={16}
+        contentContainerStyle={[paddingBottom]}
       >
         <Ads />
         <ListFeature />
         <HeardRecently />
         <MusicTabView />
       </ScrollView>
-      {sheetType === SheetTypeMusic.MUSIC && (
+      {/* {sheetType === SheetTypeMusic.MUSIC && (
         <AppBottomSheet
           snapPoints={[screenHeight - 100]}
           index={0}
@@ -50,7 +47,7 @@ const Music = () => {
             <AppText>ok ok</AppText>
           </Box>
         </AppBottomSheet>
-      )}
+      )} */}
     </Box>
   )
 }

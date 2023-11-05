@@ -1,5 +1,5 @@
 import React from 'react'
-import Svg, { Circle, Line, Path, Polygon } from 'react-native-svg'
+import Svg, { Polygon } from 'react-native-svg'
 
 interface IProps {
   size?: number
@@ -17,7 +17,7 @@ const ICSave = ({ size = 24, color = '#ffffff' }: IProps) => {
         strokeLinejoin="round"
         strokeWidth="2"
       />
-    </Svg>
+    </Svg>  
   )
 }
 

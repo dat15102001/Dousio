@@ -12,6 +12,7 @@ import BottomTabBar from '@/components/BottomTabBar'
 import Favorite from '@/screens/Favorite'
 import Profile from '@/screens/Profile'
 import Music from '@/screens/Music'
+import MusicPlayer from '@/screens/MusicPlayer'
 const Tab = createBottomTabNavigator()
 const Stack = createNativeStackNavigator()
 const BottomTab = () => {

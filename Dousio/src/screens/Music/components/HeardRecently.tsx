@@ -15,23 +15,23 @@ interface IHeardRecently {
 
 const listHeardRecently: [IHeardRecently] = [
   {
-    url: 'https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/375971647_276469335335922_6058325743436830773_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=w76kV0gcjf0AX87OFYR&_nc_ht=scontent.fhan15-2.fna&oh=00_AfAE61n6QKVEJiJJakMMJ-Si_m0sK3b8d_21CeqLMDFp1w&oe=654100ED',
+    url: 'https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/08/ve-luffy-1.jpg',
     title: 'Bài hát nghe gần đây',
   },
   {
-    url: 'https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/375982487_276469435335912_1223575597112949437_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dbSjwubm1vYAX8qtHBx&_nc_ht=scontent.fhan15-1.fna&oh=00_AfAPpTKHbEEyUtLIMZ6bG2chDSqLTd6ayvvtlp68eMBFAg&oe=653FE9AA',
+    url: 'https://gamek.mediacdn.vn/133514250583805952/2022/3/23/kaicd1-1648008713032478606212.jpg',
     title: 'Music suy',
   },
   {
-    url: 'https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/395075279_636508835322924_3238948474200770113_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ihf5vEYdO6UAX-Giqyc&_nc_ht=scontent.fhan15-2.fna&oh=00_AfDf8kJrdjADCRKQ10OKezZpyMMHmnS_YYT251ZO1N-lxQ&oe=65415E48',
+    url: 'https://cdn.oneesports.vn/cdn-data/sites/4/2023/09/One-Piece-Gear-5-thumb.jpg',
     title: 'Go',
   },
   {
-    url: 'https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/383398690_848186260033124_4665249479019526291_n.jpg?stp=dst-jpg_p843x403&_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=gIs-vccxCHoAX867W8j&_nc_ht=scontent.fhan15-2.fna&oh=00_AfD0I7xbVgyJQGIHQFl5F1yuTOZ3REAYOLPCPlaSOPiMWA&oe=6541662A',
+    url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkxB-MCnnqt3EDxnsdzMfxg027eCzcju8NaZOP_ufHqEzz2uoctjflmvTOdjAyiTI0oaE&usqp=CAU',
     title: 'Lofi',
   },
   {
-    url: 'https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/395075279_636508835322924_3238948474200770113_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ihf5vEYdO6UAX-Giqyc&_nc_ht=scontent.fhan15-2.fna&oh=00_AfDf8kJrdjADCRKQ10OKezZpyMMHmnS_YYT251ZO1N-lxQ&oe=65415E48',
+    url: 'https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/anh-luffy.jpg',
     title: 'Flex chill',
   },
 ]

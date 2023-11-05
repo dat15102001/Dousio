@@ -351,6 +351,8 @@ PODS:
     - RCTTypeSafety
     - React-Core
     - ReactCommon/turbomodule/core
+  - react-native-slider (4.4.3):
+    - React-Core
   - react-native-spinkit (1.4.1):
     - React
   - react-native-track-player (4.0.0):
@@ -545,6 +547,7 @@ DEPENDENCIES:
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - react-native-spinkit (from `../node_modules/react-native-spinkit`)
   - react-native-track-player (from `../node_modules/react-native-track-player`)
   - react-native-video (from `../node_modules/react-native-video`)
@@ -660,6 +663,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-slider:
+    :path: "../node_modules/@react-native-community/slider"
   react-native-spinkit:
     :path: "../node_modules/react-native-spinkit"
   react-native-track-player:
@@ -760,6 +765,7 @@ SPEC CHECKSUMS:
   react-native-image-picker: db60857e03d63721f19b6f4027de20429ddd9cba
   react-native-pager-view: 0ccb8bf60e2ebd38b1f3669fa3650ecce81db2df
   react-native-safe-area-context: 68b07eabfb0d14547d36f6929c0e98d818064f02
+  react-native-slider: 1cdd6ba29675df21f30544253bf7351d3c2d68c4
   react-native-spinkit: da294fd828216ad211fe36a5c14c1e09f09e62db
   react-native-track-player: ec01d92e7c66d6383926e6028f4f233c7a831062
   react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
@@ -791,6 +797,6 @@ SPEC CHECKSUMS:
   Yoga: 0518155cfbcc68c56223422f6a20a71b82e307d2
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 1bbed15f12d82c7e89abc0abe2cd690f322eb343
+PODFILE CHECKSUM: c9dc810ebf8327c283c78d338bcfc80519196976
 
 COCOAPODS: 1.12.0

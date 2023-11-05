@@ -1,17 +1,20 @@
 import {
   Dimensions,
+  ScrollView,
   StyleSheet,
   Text,
   View,
   useWindowDimensions,
 } from 'react-native'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Box from '@/components/Box'
 import Animated, {
   Extrapolate,
   interpolate,
   useAnimatedStyle,
   useSharedValue,
+  withSpring,
+  withTiming,
 } from 'react-native-reanimated'
 import { Colors } from '@/theme'
 import Icon from '@/assets/svg/Icon'
@@ -19,12 +22,15 @@ import _ from 'lodash'
 import Album from '@/screens/Profile/components/Album'
 import AppText from '@/components/AppText'
 import Playlist from './Playlist'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const screenWidth = Dimensions.get('screen').width
 
 const MusicTabView = () => {
+  const scrollRef = useRef<ScrollView>()
   const scrollTabX = useSharedValue<number>(0)
   const [currentIndex, setCurrentIndex] = useState<number>(0)
+  const translateX = useSharedValue<number>(0)
 
   const tabs = [
     { key: 1, title: 'Playlist' },
@@ -33,15 +39,20 @@ const MusicTabView = () => {
 
   const renderTabView = () => {
     const styleAnimated = useAnimatedStyle(() => {
-      // if (scrollTabX.value > screenWidth) {
-      //   scrollTabX.value = screenWidth
-      // }
       return {
-        transform: [{ translateX: (scrollTabX.value * 80) / screenWidth }],
+        transform: [{ translateX: translateX.value }],
       }
     })
 
     const { width } = useWindowDimensions()
+
+    const onPressTab = (index: number) => {
+      const tabWidth = 80
+      const newX = index * tabWidth
+      translateX.value = withSpring(newX)
+      scrollTabX.value = withTiming(newX)
+      scrollRef.current.scrollTo({ x: index * screenWidth, animated: true })
+    }
 
     return (
       <Box paddingBottom={20} paddingHorizontal={4}>
@@ -65,20 +76,18 @@ const MusicTabView = () => {
             })
 
             return (
-              <Box
-                width={80}
-                key={index}
-                center
-              >
-                <Animated.Text
-                  style={[
-                    styleTextAnimated,
-                    { fontSize: 18, fontWeight: 'bold', color: Colors.white },
-                  ]}
-                >
-                  {item.title}
-                </Animated.Text>
-              </Box>
+              <TouchableOpacity onPress={() => onPressTab(index)} key={index}>
+                <Box width={80} center>
+                  <Animated.Text
+                    style={[
+                      styleTextAnimated,
+                      { fontSize: 18, fontWeight: 'bold', color: Colors.white },
+                    ]}
+                  >
+                    {item.title}
+                  </Animated.Text>
+                </Box>
+              </TouchableOpacity>
             )
           })}
         </Box>
@@ -105,17 +114,23 @@ const MusicTabView = () => {
     setCurrentIndex(index)
   }
 
+  const handleScroll = event => {
+    scrollTabX.value = event.nativeEvent.contentOffset.x
+    translateX.value = withTiming(
+      (event.nativeEvent.contentOffset.x * 80) / screenWidth,
+      { duration: 0 },
+    )
+  }
+
   return (
     <Box marginTop={40}>
       {renderTabView()}
       <Animated.ScrollView
+        ref={scrollRef}
         horizontal
         snapToAlignment="center"
         pagingEnabled
-        onScroll={event => {
-          scrollTabX.value = event.nativeEvent.contentOffset.x
-          // calculateCurrentIndex(event.nativeEvent.contentOffset.x)
-        }}
+        onScroll={handleScroll}
         keyExtractor={(_, index) => index.toString()}
         scrollEventThrottle={16}
         showsHorizontalScrollIndicator={false}

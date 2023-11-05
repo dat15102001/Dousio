@@ -33,3 +33,8 @@ export type IconName =
   | 'pause'
   | 'arrowdown'
   | 'delete'
+  | 'shuffle'
+  | 'prev'
+  | 'next'
+  | 'loop'
+  | 'share-music'

@@ -1,35 +1,10 @@
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
-import React, { useEffect } from 'react'
+import { StyleSheet, TouchableOpacity } from 'react-native'
+import React from 'react'
 import Box from '@/components/Box'
 import AppText from '@/components/AppText'
 import { Colors } from '@/theme'
 import FastImage from 'react-native-fast-image'
 import TrackPlayer, { Capability } from 'react-native-track-player'
-import AppBottomSheet from '@/components/AppBottomSheet'
-
-export interface IPlaylistItem {
-  url: string
-  title: string
-  author: string
-}
-
-export const tracks = [
-  {
-    id: '1',
-    url: require('../../../assets/musics/ngonngang_suy_mck.mp3'),
-    title: 'Keys of moon',
-    artist: 'The Epic Hero',
-    artwork: 'https://picsum.photos/id/1003/200/300',
-    album: 'hi',
-    duration: 149,
-  },
-]
 
 TrackPlayer.updateOptions({
   // Media controls capabilities
@@ -45,34 +20,23 @@ TrackPlayer.updateOptions({
   compactCapabilities: [Capability.Play, Capability.Pause],
 })
 
+export interface IPlaylistItem {
+  thumbnail: string
+  title: string
+  artists_names: string
+  onPress: () => void
+}
+
 const MusicItem = (props: IPlaylistItem) => {
-  const { url, title, author } = props
-
-  const setUpTracks = async () => {
-    try {
-      await TrackPlayer.setupPlayer()
-      await TrackPlayer.add(tracks)
-    } catch (e) {}
-  }
-
-  useEffect(() => {
-    setUpTracks()
-  }, [])
-
-  const onPlayMusic = async () => {
-    const track = await TrackPlayer.getTrack(0)
-    console.log('track=', track.url)
-    TrackPlayer.play()
-  }
-
+  const { thumbnail, title, artists_names, onPress } = props
   return (
-    <TouchableOpacity onPress={onPlayMusic}>
+    <TouchableOpacity onPress={onPress}>
       <Box row align="center">
         <FastImage
           style={styles.image}
           resizeMode="cover"
           source={{
-            uri: url,
+            uri: thumbnail,
           }}
         />
         <Box marginLeft={12}>
@@ -81,7 +45,7 @@ const MusicItem = (props: IPlaylistItem) => {
               {title}
             </AppText>
             <AppText fontSize={13} fontWeight="500" color={Colors.gray606060}>
-              {author}
+              {artists_names}
             </AppText>
           </Box>
         </Box>
