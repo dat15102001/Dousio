@@ -20,6 +20,7 @@ const persistConfig = {
   storage: AsyncStorage,
   keyPrefix: '',
   whitelist: ['appInfoReducer'],
+  blacklist: ['musicReducer']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer)

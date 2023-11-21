@@ -14,4 +14,5 @@ export const APIs = {
 
   //   MUSICPLAYER
   MUSIC: 'music',
+  CODE_SONG: 'song',
 }

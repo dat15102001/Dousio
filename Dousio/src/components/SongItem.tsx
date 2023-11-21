@@ -5,14 +5,14 @@ import AppText from '@/components/AppText'
 import { Colors } from '@/theme'
 import FastImage from 'react-native-fast-image'
 
-export interface IPlaylistItem {
+export interface ISongItem {
   thumbnail: string
   title: string
   artists_names: string
   onPress: () => void
 }
 
-const MusicItem = (props: IPlaylistItem) => {
+const SongItem = (props: ISongItem) => {
   const { thumbnail, title, artists_names, onPress } = props
   return (
     <TouchableOpacity onPress={onPress}>
@@ -39,7 +39,7 @@ const MusicItem = (props: IPlaylistItem) => {
   )
 }
 
-export default MusicItem
+export default SongItem
 
 const styles = StyleSheet.create({
   image: {

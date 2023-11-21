@@ -1,11 +1,13 @@
 import { Dimensions, StyleSheet, View } from 'react-native'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import TrackPlayer, {
-  Capability,
-  RepeatMode,
-  useProgress,
-} from 'react-native-track-player'
-import Animated, { useSharedValue, withTiming } from 'react-native-reanimated'
+import TrackPlayer, { RepeatMode, useProgress } from 'react-native-track-player'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withSpring,
+  withTiming,
+} from 'react-native-reanimated'
 import { Slider, SliderThemeType } from 'react-native-awesome-slider'
 import { Colors } from '@/theme'
 import { secondsToHHMMSS } from '@/commons'
@@ -16,16 +18,32 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { IMusic } from '@/api/types'
 import _ from 'lodash'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
+import { useAppDispatch } from '@/redux/hooks'
+import { setIndexSong, setLottie, setRotateThumnail } from '@/redux/Music/slice'
+import LottieView from 'lottie-react-native'
 
 const { width } = Dimensions.get('screen')
 
 interface IControllerMusic {
-  listMusic: IMusic[]
+  listSong: IMusic[]
   setMusic: any
+  song: IMusic
+  scrollX: any
+  heightController: any
+  indexSong: number
+  opacity: any
 }
 
 const ControllerMusic = (props: IControllerMusic) => {
-  const { listMusic, setMusic } = props
+  const {
+    listSong,
+    setMusic,
+    heightController,
+    scrollX,
+    song,
+    indexSong,
+    opacity,
+  } = props
   const progress = useSharedValue<number>(0)
   const min = useSharedValue<number>(0)
   const max = useSharedValue<number>(200)
@@ -36,17 +54,20 @@ const ControllerMusic = (props: IControllerMusic) => {
   const [isPlay, setPlay] = useState<boolean>(true)
   const [isShuffle, setShuffle] = useState<boolean>(false)
   const [isLoop, setLoop] = useState<boolean>(false)
-
+  const [isNextButtonDisabled, setNextButtonDisabled] = useState<boolean>(false)
+  const [isPrevButtonDisabled, setPrevButtonDisabled] = useState<boolean>(false)
   const { position, buffered, duration } = useProgress()
+  const dispatch = useAppDispatch()
 
   const paddingBottom = useMemo(() => {
-    return { bottom: 100 }
+    return { bottom: 30 }
   }, [])
 
   const theme: SliderThemeType = {
     minimumTrackTintColor: Colors.white,
     maximumTrackTintColor: Colors.gray606060,
     cacheTrackTintColor: Colors.grayBDB7B7,
+
     // bubbleBackgroundColor: Colors.error,
     // disableMinTrackTintColor: Colors.black50,
   }
@@ -75,6 +96,27 @@ const ControllerMusic = (props: IControllerMusic) => {
     return () => clearInterval(interval)
   }, [sliding])
 
+  // Trong useEffect, kiểm tra điều kiện và cập nhật biến trạng thái
+  useEffect(() => {
+    checkNextOrPrevDisable()
+  }, [song])
+
+  const checkNextOrPrevDisable = useCallback(async () => {
+    if (listSong.length - 1 === indexSong) {
+      setNextButtonDisabled(true)
+    }
+    if (listSong.length - 1 === (await TrackPlayer.getActiveTrackIndex())) {
+      setNextButtonDisabled(true)
+    } else {
+      setNextButtonDisabled(false)
+    }
+    if ((await TrackPlayer.getActiveTrackIndex()) === 0) {
+      setPrevButtonDisabled(true)
+    } else {
+      setPrevButtonDisabled(false)
+    }
+  }, [song])
+
   const onSlidingStart = () => {
     setThumbWidth(15)
     setSliding(true)
@@ -89,6 +131,8 @@ const ControllerMusic = (props: IControllerMusic) => {
   const onPressBtnPlay = async () => {
     setPlay(!isPlay)
     isPlay === true ? TrackPlayer.pause() : TrackPlayer.play()
+    dispatch(setRotateThumnail(!isPlay))
+    dispatch(setLottie(!isPlay))
   }
 
   const onPressBtnShuffle = () => {
@@ -107,20 +151,36 @@ const ControllerMusic = (props: IControllerMusic) => {
 
   const onPressBtnPrev = async () => {
     TrackPlayer.skipToPrevious()
-    setMusic(listMusic[await TrackPlayer.getActiveTrackIndex()])
-    TrackPlayer.play()
+    await TrackPlayer.play()
+    setMusic(listSong[await TrackPlayer.getActiveTrackIndex()])
+    dispatch(setIndexSong(await TrackPlayer.getActiveTrackIndex()))
+    opacity.value = withSequence(
+      withSpring(0, { duration: 200 }),
+      withSpring(1, { duration: 1000 })
+    )
   }
 
   const onPressBtnNext = async () => {
     TrackPlayer.skipToNext()
-    setMusic(listMusic[await TrackPlayer.getActiveTrackIndex()])
-    TrackPlayer.play()
+    await TrackPlayer.play()
+    setMusic(listSong[await TrackPlayer.getActiveTrackIndex()])
+    dispatch(setIndexSong(await TrackPlayer.getActiveTrackIndex()))
+    opacity.value = withSequence(
+      withSpring(0, { duration: 200 }),
+      withSpring(1, { duration: 1000 })
+    )
   }
 
+  const styleAnimated = useAnimatedStyle(() => {
+    return {
+      height: heightController.value,
+    }
+  })
+
   return (
-    <View style={[styles.container, paddingBottom]}>
+    <Animated.View style={[styles.container, paddingBottom, styleAnimated]}>
       <Slider
-        style={{ width: width - 60, backgroundColor: 'red' }}
+        style={styles.slider}
         minimumValue={min}
         maximumValue={max}
         progress={progress}
@@ -152,14 +212,22 @@ const ControllerMusic = (props: IControllerMusic) => {
             iconName="shuffle"
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={onPressBtnPrev}>
-          <Icon size={26} iconName="prev" />
+        <TouchableOpacity
+          onPress={onPressBtnPrev}
+          disabled={isPrevButtonDisabled}>
+          <View style={{ opacity: isPrevButtonDisabled ? 0.5 : 1 }}>
+            <Icon size={26} iconName="prev" />
+          </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={onPressBtnPlay}>
           <Icon size={50} iconName={isPlay ? 'pause' : 'play'} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={onPressBtnNext}>
-          <Icon size={26} iconName="next" />
+        <TouchableOpacity
+          onPress={onPressBtnNext}
+          disabled={isNextButtonDisabled}>
+          <View style={{ opacity: isNextButtonDisabled ? 0.5 : 1 }}>
+            <Icon size={26} iconName="next" />
+          </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={onPressBtnLoop}>
           <Icon
@@ -169,7 +237,31 @@ const ControllerMusic = (props: IControllerMusic) => {
           />
         </TouchableOpacity>
       </View>
-    </View>
+      <View style={styles.viewIconController}>
+        <TouchableOpacity onPress={() => {}}>
+          <Icon iconName="chat" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {}}>
+          <Icon iconName="music-plus" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {}}>
+          <View style={styles.viewQuanlity}>
+            <AppText fontSize={12} fontWeight="800" color={Colors.grayBDB7B7}>
+              320kbps
+            </AppText>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {}}>
+          <Icon iconName="download" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            TrackPlayer.setRate(1)
+          }}>
+          <Icon iconName="speed" />
+        </TouchableOpacity>
+      </View>
+    </Animated.View>
   )
 }
 
@@ -179,14 +271,16 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     alignItems: 'center',
-    marginTop: 50,
-    paddingHorizontal: 30,
     position: 'absolute',
+  },
+  slider: {
+    width: width - 60,
+    marginTop: 12,
+    height: 20,
   },
   viewTime: {
     width: width,
     flexDirection: 'row',
-    marginTop: 12,
     justifyContent: 'space-between',
     paddingHorizontal: 30,
   },
@@ -195,7 +289,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 30,
-    marginTop: 30,
+    marginTop: 12,
     alignItems: 'center',
+  },
+  viewQuanlity: {
+    backgroundColor: Colors.gray262626,
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    borderRadius: 8,
+    opacity: 0.8,
   },
 })

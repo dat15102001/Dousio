@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity } from 'react-native'
-import React, { memo, useMemo } from 'react'
+import React, { memo, useMemo, useState } from 'react'
 import Box from '@/components/Box'
 import Icon from '@/assets/svg/Icon'
 import Header from '@/components/Header'
@@ -7,6 +7,8 @@ import { Colors } from '@/theme'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import AppText from '@/components/AppText'
 import Padding from '@/components/Padding'
+import Panigator from '@/components/Panigator'
+import { useSharedValue } from 'react-native-reanimated'
 
 interface IMusicHeader {
   onPressBackBtn?: () => void
@@ -39,9 +41,6 @@ const MusicHeader = (props: IMusicHeader) => {
             Flow nay muot
           </AppText>
           <Padding top={4} />
-          <AppText fontSize={15} fontWeight="400" color={Colors.white}>
-            .
-          </AppText>
         </Box>
         <Box style={{ position: 'absolute', right: 16, top: 4 }}>
           <TouchableOpacity style={styles.headerBtn} onPress={() => {}}>

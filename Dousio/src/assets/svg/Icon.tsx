@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import HomeSvg from './Common/HomeSvg'
 import { IconName } from './type'
@@ -39,6 +38,10 @@ import ICNext from './ICNext'
 import ICPrev from './ICPrev'
 import ICLoop from './ICLoop'
 import ICShareMusic from './ICShareMusic'
+import ICSpeed from './ICSpeed'
+import ICDownload from './ICDownLoad'
+import ICMusicPlus from './ICMusicPlus'
+import ICChat from './ICChat'
 
 interface IProps {
   iconName: IconName
@@ -90,6 +93,10 @@ const Icon = (props: IProps) => {
     ['prev', <ICPrev size={size} color={color} />],
     ['loop', <ICLoop size={size} color={color} />],
     ['share-music', <ICShareMusic size={size} color={color} />],
+    ['speed', <ICSpeed size={size} color={color} />],
+    ['download', <ICDownload size={size} color={color} />],
+    ['music-plus', <ICMusicPlus size={size} color={color} />],
+    ['chat', <ICChat size={size} color={color} />],
   ])
   return icon.get(iconName) ?? null
 }

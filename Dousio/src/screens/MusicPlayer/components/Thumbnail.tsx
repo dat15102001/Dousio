@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Animated, {
   Easing,
   interpolate,
@@ -8,52 +8,79 @@ import Animated, {
   withRepeat,
   withTiming,
 } from 'react-native-reanimated'
-import FastImage from 'react-native-fast-image'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import AppText from '@/components/AppText'
 import Icon from '@/assets/svg/Icon'
 import { Colors } from '@/theme'
-import TrackPlayer from 'react-native-track-player'
 import { IMusic } from '@/api/types'
+import { useLottieMusic, useRotateThumnailMusic } from '@/redux/Music/hooks'
+import LottieView from 'lottie-react-native'
 
 interface IThumnail {
   music: IMusic
+  opacity:any
 }
 const Thumbnail = (props: IThumnail) => {
-  const { music } = props
+  const { music, opacity } = props
   const rotate = useSharedValue<number>(0)
+  const isRotate = useRotateThumnailMusic()
 
   useEffect(() => {
-    rotate.value = withRepeat(
-      withTiming(360, {
-        duration: 15000,
-        easing: Easing.linear,
-      }),
-      -1,
-    )
-  }, [])
+    if (isRotate) {
+      rotate.value = withRepeat(
+        withTiming(360, {
+          duration: 15000,
+          easing: Easing.linear,
+        }),
+        -1,
+      )
+    } else {
+      rotate.value = withRepeat(
+        withTiming(rotate.value, { duration: 0, easing: Easing.linear }),
+      )
+    }
+  }, [isRotate])
 
   const styleAnimated = useAnimatedStyle(() => {
     return {
       transform: [{ rotate: `${rotate.value}deg` }],
+      opacity: opacity.value,
     }
   })
+
+  const isLottie = useLottieMusic()
+
+  const lottieRef = useRef<any>()
+
+  useEffect(() => {
+    isLottie ? lottieRef.current.play() : lottieRef.current.pause()
+  }, [isLottie])
 
   return (
     <View style={styles.container}>
       <Animated.Image
         style={[styleAnimated, styles.thumbnail]}
-        source={{ uri: music.thumbnail }}
+        source={{
+          uri: music.thumbnail,
+        }}
       />
       <View style={styles.view}>
         <TouchableOpacity>
           <Icon iconName="share-music" />
         </TouchableOpacity>
         <View style={styles.viewNameMusic}>
-          <AppText fontSize={16} fontWeight="500" color={Colors.white} numberOfLines={1}>
+          <AppText
+            fontSize={16}
+            fontWeight="500"
+            color={Colors.white}
+            numberOfLines={1}>
             {music.title}
           </AppText>
-          <AppText fontSize={16} fontWeight="500" color={Colors.grayBDB7B7} numberOfLines={1}>
+          <AppText
+            fontSize={16}
+            fontWeight="500"
+            color={Colors.grayBDB7B7}
+            numberOfLines={1}>
             {music.artists_names}
           </AppText>
         </View>
@@ -61,6 +88,13 @@ const Thumbnail = (props: IThumnail) => {
           <Icon iconName="favorite-tab" />
         </TouchableOpacity>
       </View>
+      <LottieView
+        ref={lottieRef}
+        source={require('../../../assets/lotties/music.json')}
+        autoPlay={false}
+        loop
+        style={{ width: 1000, height: 150, marginTop: -25 }}
+      />
     </View>
   )
 }
@@ -71,7 +105,9 @@ const { width } = Dimensions.get('screen')
 
 const styles = StyleSheet.create({
   container: {
+    width: width,
     alignItems: 'center',
+    marginTop: 30,
   },
   thumbnail: {
     width: width - 100,
@@ -79,7 +115,7 @@ const styles = StyleSheet.create({
     borderRadius: (width - 100) / 2,
   },
   view: {
-    width: '100%',
+    width: width,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

@@ -9,7 +9,7 @@ import Padding from './Padding'
 import ButtonFollow from './ButtonFollow'
 import AppTextMore from './AppTextMore'
 import _ from 'lodash'
-import Panigator2 from './Panigator'
+import Panigator from './Panigator'
 import Animated, {
   useAnimatedScrollHandler,
   useAnimatedStyle,
@@ -194,7 +194,7 @@ const PostItem = () => {
             center
             style={{ position: 'absolute' }}
           >
-            <Panigator2
+            <Panigator
               item={imageData}
               scrollX={scrollX}
               currentIndex={currentIndex}

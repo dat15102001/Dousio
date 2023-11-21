@@ -38,3 +38,7 @@ export type IconName =
   | 'next'
   | 'loop'
   | 'share-music'
+  | 'speed'
+  | 'download'
+  | 'music-plus'
+  | 'chat'
